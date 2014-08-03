@@ -75,7 +75,7 @@ public class SourcesFragment extends Fragment {
 
                             @Override
                             public void run() {
-                                mList.setAdapter(new SiteAdapter(nColl));
+                                mList.setAdapter(new SiteAdapter(nColl, getActivity()));
                                 mCallback.actionFinished();
                                 if (mCallback.changeVisibility()) {
                                     getActivity().setProgressBarIndeterminateVisibility(false);
