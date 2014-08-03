@@ -75,7 +75,7 @@ public class SourcesFragment extends Fragment {
 
                             @Override
                             public void run() {
-                                //lvArticles.setAdapter(new ArticlesAdapter(getActivity(), nColl));
+                                mList.setAdapter(new SiteAdapter(nColl));
                                 mCallback.actionFinished();
                                 if (mCallback.changeVisibility()) {
                                     getActivity().setProgressBarIndeterminateVisibility(false);
