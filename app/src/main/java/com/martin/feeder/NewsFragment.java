@@ -22,6 +22,7 @@ public class NewsFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        setRetainInstance(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mList.setLayoutManager(layoutManager);
     }
