@@ -17,10 +17,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 
 
-public class Main extends Activity implements ActionBar.TabListener {
+public class Main extends Activity implements ActionBar.TabListener, OnProgressChangeListener {
+
+    private int actionsInProgress;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -40,7 +43,10 @@ public class Main extends Activity implements ActionBar.TabListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_main);
+
+        actionsInProgress = 0;
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
@@ -112,6 +118,24 @@ public class Main extends Activity implements ActionBar.TabListener {
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
 
+    @Override
+    public void actionStarted() {
+        actionsInProgress++;
+    }
+
+    @Override
+    public void actionFinished() {
+        actionsInProgress--;
+    }
+
+    @Override
+    public boolean changeVisibility() {
+        if (actionsInProgress > 0) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -125,7 +149,6 @@ public class Main extends Activity implements ActionBar.TabListener {
         @Override
         public Fragment getItem(int position) {
             Fragment f = null;
-            Log.d("FFF", position + "");
             switch (position) {
                 case 0:
                     f = new NewsFragment();
@@ -144,14 +167,7 @@ public class Main extends Activity implements ActionBar.TabListener {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            Locale l = Locale.getDefault();
-            switch (position) {
-                case 0:
-                    return getString(R.string.title_section1).toUpperCase(l);
-                case 1:
-                    return getString(R.string.title_section2).toUpperCase(l);
-            }
-            return null;
+            return getResources().getStringArray(R.array.titles)[position];
         }
     }
 
