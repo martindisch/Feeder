@@ -28,7 +28,7 @@ public class NewsSources {
 
 	public NewsCollection getA3_News() {
 		final String url = "http://www.arma3.com/news";
-		final String classname = "news_article";
+		final String classname = "col-sm-9";
 
 		Document doc = null;
 		Elements content = null;
@@ -47,6 +47,8 @@ public class NewsSources {
 		}
 		if (!(doc == null)) {
 			content = doc.getElementsByClass(classname);
+            // Remove last element which isn't a post
+            content.remove(content.size() - 1);
 
 			titles = new String[content.size()];
 			urls = new String[content.size()];
@@ -56,7 +58,7 @@ public class NewsSources {
 				content.get(i).select("[src]").remove();
 				titles[i] = content.get(i).select("header").text();
 				urls[i] = content.get(i).select("header").select("a[href]").attr("abs:href");
-				contents[i] = content.get(i).getElementsByClass("post_content").text();
+				contents[i] = content.get(i).getElementsByClass("post-excerpt").text();
 			}
 			
 			nColl = new NewsCollection(titles, urls, contents);
@@ -67,7 +69,7 @@ public class NewsSources {
 	
 	public NewsCollection getA3_Devhub() {
 		final String url = "http://dev.arma3.com/";
-		final String classname = "news_article";
+		final String classname = "post-preview";
 
 		Document doc = null;
 		Elements content = null;
@@ -87,6 +89,8 @@ public class NewsSources {
 		}
 		if (!(doc == null)) {
 			content = doc.getElementsByClass(classname);
+            // Remove last element which isn't a post
+            content.remove(content.size() - 1);
 
 			titles = new String[content.size()];
 			urls = new String[content.size()];
@@ -96,7 +100,7 @@ public class NewsSources {
 				content.get(i).select("[src]").remove();
 				titles[i] = content.get(i).select("header").text();
 				urls[i] = content.get(i).select("header").select("a[href]").attr("abs:href");
-				contents[i] = content.get(i).getElementsByClass("post_content").text();
+				contents[i] = content.get(i).getElementsByClass("dev-post-excerpt").text();
 			}
 			
 			nColl = new NewsCollection(titles, urls, contents);
@@ -147,7 +151,7 @@ public class NewsSources {
 	}
 	
 	public NewsCollection getLayer_News() {
-		final String url = "https://layer.com/news/1";
+		final String url = "http://blog.layer.com/";
 		final String classname = "post";
 
 		Document doc = null;
@@ -175,10 +179,9 @@ public class NewsSources {
 
 			for (int i = 0; i < content.size(); i++) {
 				content.get(i).select("[src]").remove();
-				urls[i] = content.get(i).select("header").select("a[class]").select("a[href]").attr("abs:href");
-				titles[i] = content.get(i).select("header").select("a[class]").text();
-				content.get(i).select("header").select("a[class]").remove();
-				contents[i] = content.get(i).select("header").select("a[href]").text();
+                titles[i] = content.get(i).getElementsByClass("post-title").text();
+                urls[i] = content.get(i).getElementsByClass("post-title").select("a[href]").attr("abs:href");
+                contents[i] = content.get(i).getElementsByClass("post-excerpt").text();
 			}
 			
 			nColl = new NewsCollection(titles, urls, contents);
