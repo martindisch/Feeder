@@ -7,5 +7,11 @@
     <string name="title_section3">Section 3</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string-array name="dropdown_values">
+        <item >ArmA 3 News</item>
+        <item >ArmA 3 Devhub</item>
+        <item >Space Engineers</item>
+        <item >Layer News</item>
+    </string-array>
 
 </resources>

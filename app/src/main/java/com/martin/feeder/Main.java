@@ -10,6 +10,7 @@ import android.app.FragmentTransaction;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -123,14 +124,21 @@ public class Main extends Activity implements ActionBar.TabListener {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            Fragment f = null;
+            Log.d("FFF", position + "");
+            switch (position) {
+                case 0:
+                    f = new NewsFragment();
+                    break;
+                case 1:
+                    f = new SourcesFragment();
+                    break;
+            }
+            return f;
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 2;
         }
 
