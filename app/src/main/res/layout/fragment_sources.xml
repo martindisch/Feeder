@@ -15,13 +15,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="Source:"/>
+            android:text="@string/source"/>
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spSources"
             android:entries="@array/dropdown_values"/>
-
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
