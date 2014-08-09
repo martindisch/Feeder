@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder> {
 
     private NewsCollection nColl;
@@ -38,8 +41,7 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder> {
                     SharedPreferences.Editor editor = spLibrary.edit();
                     editor.putBoolean(((TextView) view.findViewById(R.id.tvTitle)).getText().toString(), true);
                     editor.commit();
-                    ((NewsFragment) parent).loadUnread();
-                    
+                    notifyItemRemoved(((NewsFragment) parent).mList.getChildPosition(view));
                 }
             }
         });

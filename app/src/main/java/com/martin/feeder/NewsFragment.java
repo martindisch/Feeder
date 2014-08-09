@@ -13,7 +13,7 @@ import android.widget.Toast;
 public class NewsFragment extends Fragment {
 
     private OnProgressChangeListener mCallback;
-    private RecyclerView mList;
+    public RecyclerView mList;
     private NewsSources nSources;
     private NewsCollection nColl;
 
