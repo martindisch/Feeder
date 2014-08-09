@@ -1,7 +1,9 @@
 package com.martin.feeder;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,11 +14,13 @@ import android.widget.TextView;
 public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder> {
 
     private NewsCollection nColl;
-    private Context context;
+    private Fragment parent;
+    private String parentName;
 
-    public SiteAdapter(NewsCollection nColl, Context context) {
+    public SiteAdapter(NewsCollection nColl, Fragment parent, String parentName) {
         this.nColl = nColl;
-        this.context = context;
+        this.parent = parent;
+        this.parentName = parentName;
     }
 
     @Override
@@ -28,8 +32,15 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder> {
                 String url = view.findViewById(R.id.tvTitle).getTag().toString();
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
-                context.startActivity(i);
-                // startActivity(i);
+                parent.getActivity().startActivity(i);
+                if (parentName.contentEquals("NewsFragment")) {
+                    SharedPreferences spLibrary = parent.getActivity().getSharedPreferences("Library", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = spLibrary.edit();
+                    editor.putBoolean(((TextView) view.findViewById(R.id.tvTitle)).getText().toString(), true);
+                    editor.commit();
+                    ((NewsFragment) parent).loadUnread();
+                    
+                }
             }
         });
         return new ViewHolder(v);

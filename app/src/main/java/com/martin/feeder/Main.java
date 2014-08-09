@@ -4,12 +4,21 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.app.ActionBar;
+import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.format.DateUtils;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 
@@ -81,6 +91,8 @@ public class Main extends Activity implements ActionBar.TabListener, OnProgressC
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+
+        ScheduleService();
     }
 
 
@@ -93,14 +105,62 @@ public class Main extends Activity implements ActionBar.TabListener, OnProgressC
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                AlertDialog.Builder dg = new AlertDialog.Builder(this);
+                final NumberPicker np = new NumberPicker(this);
+                final SharedPreferences spSettings = getSharedPreferences(
+                        "Settings", MODE_PRIVATE);
+                np.setMinValue(1);
+                np.setMaxValue(9000);
+                np.setValue(spSettings.getInt("interval", 240));
+                dg.setView(np);
+                dg.setMessage("The interval to check for news in the background.");
+                dg.setNegativeButton("Cancel", null);
+                dg.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferences.Editor editor = spSettings.edit();
+                        editor.putInt("interval", np.getValue());
+                        editor.commit();
+                        ScheduleService();
+                    }
+
+                });
+                dg.show();
+                break;
+            case R.id.mark_read:
+                final NewsSources nSources = new NewsSources(this);
+                setProgressBarIndeterminateVisibility(true);
+                new Thread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        nSources.setAllRead();
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                setProgressBarIndeterminateVisibility(false);
+                                NewsFragment fragment = (NewsFragment) findFragmentByPosition(0);
+                                fragment.loadUnread();
+                            }
+
+                        });
+                    }
+
+                }).start();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public Fragment findFragmentByPosition(int position) {
+        SectionsPagerAdapter fragmentPagerAdapter = mSectionsPagerAdapter;
+        return getFragmentManager().findFragmentByTag(
+                "android:switcher:" + mViewPager.getId() + ":"
+                        + fragmentPagerAdapter.getItemId(position));
     }
 
     @Override
@@ -169,6 +229,24 @@ public class Main extends Activity implements ActionBar.TabListener, OnProgressC
         public CharSequence getPageTitle(int position) {
             return getResources().getStringArray(R.array.titles)[position];
         }
+    }
+
+    private void ScheduleService() {
+        SharedPreferences spSettings = this.getSharedPreferences("Settings",
+                Context.MODE_PRIVATE);
+        Intent intent = new Intent(this, NewsCheck.class);
+        PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        long currentTimeMillis = System.currentTimeMillis();
+        long nextUpdateTimeMillis = currentTimeMillis
+                + spSettings.getInt("interval", 240) * DateUtils.MINUTE_IN_MILLIS;
+        Time nextUpdateTime = new Time();
+        nextUpdateTime.set(nextUpdateTimeMillis);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setInexactRepeating(AlarmManager.RTC,
+                nextUpdateTimeMillis, spSettings.getInt("interval", 240)
+                        * DateUtils.MINUTE_IN_MILLIS, pendingIntent);
     }
 
 }
