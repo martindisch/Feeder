@@ -138,7 +138,7 @@ public class Main extends Activity implements ActionBar.TabListener, OnProgressC
                     @Override
                     public void run() {
                         nSources.setAllRead();
-                        ((NewsFragment) findFragmentByPosition(0)).mList.removeAllViews();
+                        ((NewsFragment) findFragmentByPosition(0)).loadUnread();
                     }
 
                 }).start();
