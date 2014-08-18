@@ -24,4 +24,23 @@ public class NewsCollection {
 		return this.contents;
 	}
 
+    public void removeItem(int position) {
+        titles = loopAndKill(titles, position);
+        urls = loopAndKill(urls, position);
+        contents = loopAndKill(contents, position);
+    }
+
+    private String[] loopAndKill(String[] array, int position) {
+        String[] newArray = new String[titles.length - 1];
+        array[position] = "keine";
+        int newCounter = 0;
+        for (int i = 0; i < (titles.length - 1); i++) {
+            if (!titles[i].contentEquals("Keine")) {
+                newArray[newCounter] = titles[i];
+                newCounter++;
+            }
+        }
+        return newArray;
+    }
+
 }
