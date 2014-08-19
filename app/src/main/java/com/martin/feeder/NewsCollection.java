@@ -1,46 +1,39 @@
 package com.martin.feeder;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class NewsCollection {
-	private String[] titles;
-	private String[] urls;
-	private String[] contents;
+	private ArrayList<String> titles;
+	private ArrayList<String> urls;
+	private ArrayList<String> contents;
 	
 	public NewsCollection(String[] titles, String[] urls, String[] contents) {
 		super();
-		this.titles = titles;
-		this.urls = urls;
-		this.contents = contents;
+		this.titles = new ArrayList<String>(Arrays.asList(titles));
+		this.urls = new ArrayList<String>(Arrays.asList(urls));
+		this.contents = new ArrayList<String>(Arrays.asList(contents));
 	}
 	
 	public String[] getTitles() {
-		return this.titles;
+        String[] arr = new String[titles.size()];
+		return titles.toArray(arr);
 	}
 	
 	public String[] getUrls() {
-		return this.urls;
+        String[] arr = new String[titles.size()];
+		return (String[]) urls.toArray(arr);
 	}
 	
 	public String[] getContents() {
-		return this.contents;
+        String[] arr = new String[titles.size()];
+		return (String[]) contents.toArray(arr);
 	}
 
     public void removeItem(int position) {
-        titles = loopAndKill(titles, position);
-        urls = loopAndKill(urls, position);
-        contents = loopAndKill(contents, position);
-    }
-
-    private String[] loopAndKill(String[] array, int position) {
-        String[] newArray = new String[titles.length - 1];
-        array[position] = "keine";
-        int newCounter = 0;
-        for (int i = 0; i < (titles.length - 1); i++) {
-            if (!titles[i].contentEquals("Keine")) {
-                newArray[newCounter] = titles[i];
-                newCounter++;
-            }
-        }
-        return newArray;
+        titles.remove(position);
+        urls.remove(position);
+        contents.remove(position);
     }
 
 }
