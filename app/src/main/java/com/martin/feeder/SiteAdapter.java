@@ -41,7 +41,8 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder> {
                     SharedPreferences.Editor editor = spLibrary.edit();
                     editor.putBoolean(((TextView) view.findViewById(R.id.tvTitle)).getText().toString(), true);
                     editor.commit();
-                    notifyItemRemoved(((NewsFragment) parent).mList.getChildPosition(view));
+                    nColl.removeItem(((NewsFragment) parent).mList.getChildPosition(view));
+                    notifyDataSetChanged();
                 }
             }
         });
