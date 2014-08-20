@@ -17,7 +17,7 @@ public class CollectionTest extends AndroidTestCase {
         prep();
         testCollection.removeItem(0);
         assertEquals(testCollection.getTitles()[0], "Title 2");
-        //assertEquals(testCollection.getTitles()[testCollection.getTitles().length - 1], "Title 4");
+        assertEquals(testCollection.getTitles()[testCollection.getTitles().length - 1], "Title 4");
     }
 
     public void testRemoveLast() {
@@ -31,8 +31,8 @@ public class CollectionTest extends AndroidTestCase {
         prep();
         testCollection.removeItem(1);
         assertEquals(testCollection.getTitles()[0], "Title 1");
-        //assertEquals(testCollection.getTitles()[testCollection.getTitles().length - 1], "Title 4");
-        //assertEquals(testCollection.getTitles()[1], "Title 2");
+        assertEquals(testCollection.getTitles()[testCollection.getTitles().length - 1], "Title 4");
+        assertEquals(testCollection.getTitles()[1], "Title 2");
     }
 
     public void testRemoveTwo() {
