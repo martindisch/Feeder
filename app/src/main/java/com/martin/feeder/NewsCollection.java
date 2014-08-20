@@ -22,12 +22,12 @@ public class NewsCollection {
 	
 	public String[] getUrls() {
         String[] arr = new String[titles.size()];
-		return (String[]) urls.toArray(arr);
+		return urls.toArray(arr);
 	}
 	
 	public String[] getContents() {
         String[] arr = new String[titles.size()];
-		return (String[]) contents.toArray(arr);
+		return contents.toArray(arr);
 	}
 
     public void removeItem(int position) {
