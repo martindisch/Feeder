@@ -32,7 +32,7 @@ public class CollectionTest extends AndroidTestCase {
         testCollection.removeItem(1);
         assertEquals(testCollection.getTitles()[0], "Title 1");
         assertEquals(testCollection.getTitles()[testCollection.getTitles().length - 1], "Title 4");
-        assertEquals(testCollection.getTitles()[1], "Title 2");
+        assertEquals(testCollection.getTitles()[1], "Title 3");
     }
 
     public void testRemoveTwo() {
