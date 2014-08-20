@@ -5,9 +5,9 @@ public class Notifier {
     private static boolean safe = false;
     private static NewsFragment parent;
 
-    public static void show() {
+    public static void show(String message) {
         if (safe) {
-            parent.showSnackbar();
+            parent.showSnackbarMessage(message);
         }
     }
 
