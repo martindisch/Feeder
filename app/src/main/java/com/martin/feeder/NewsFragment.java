@@ -61,7 +61,7 @@ public class NewsFragment extends Fragment {
         mSnackbar.setVisibility(mSnackbar.VISIBLE);
     }
 
-    private void showSnackbar() {
+    public void showSnackbar() {
         float px = -TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 56, getResources().getDisplayMetrics());
         moveSnackbar(px);
     }
@@ -122,5 +122,17 @@ public class NewsFragment extends Fragment {
             }
 
         }).start();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Notifier.setParent(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Notifier.setUnsafe();
     }
 }
