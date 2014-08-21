@@ -335,6 +335,16 @@ public class NewsSources {
 		
 		return new NewsCollection(unreadTitles, unreadUrls, unreadContents);
 	}
+
+    public void setAllNotified(NewsCollection nColl) {
+        String[] filtered = nColl.getTitles();
+        SharedPreferences spLibrary = context.getSharedPreferences("Notified", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = spLibrary.edit();
+        for (int i = 0; i < filtered.length; i++) {
+            editor.putBoolean(filtered[i], true);
+        }
+        editor.commit();
+    }
 	
 	public void setAllRead() {
 		setSingleRead(getA3_News());

@@ -112,6 +112,9 @@ public class NewsFragment extends Fragment {
                         if (nColl.getTitles().length == 0) {
                            showSnackbar();
                         }
+                        else {
+                            nSources.setAllNotified(nColl);
+                        }
                         mCallback.actionFinished();
                         if (mCallback.changeVisibility()) {
                             getActivity().setProgressBarIndeterminateVisibility(false);
