@@ -9,6 +9,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
@@ -47,12 +48,16 @@ public class NewsCheck extends IntentService {
 				mBuilder.setContentText(news);
 				mBuilder.setSmallIcon(R.drawable.ic_launcher);
 				mBuilder.setDefaults(Notification.DEFAULT_ALL);
+
+                Intent resultIntent = new Intent(NewsCheck.this, Main.class);
 				// Make it big if necessary
 				if (counter > 1) {
 					mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(news));
 				}
-				
-				Intent resultIntent = new Intent(NewsCheck.this, Main.class);
+                else {
+                    resultIntent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(nColl.getUrls()[0]));
+                }
 
 				TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 				stackBuilder.addParentStack(Main.class);
