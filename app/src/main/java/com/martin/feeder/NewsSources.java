@@ -42,7 +42,7 @@ public class NewsSources {
 		try {
 			doc = Jsoup.connect(url).get();
 		} catch (IOException e) {
-			Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
 			doc = null;
 		}
 		if (!(doc == null)) {
@@ -83,7 +83,6 @@ public class NewsSources {
 		try {
 			doc = Jsoup.connect(url).get();
 		} catch (IOException e) {
-			Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 			doc = null;
 		}
@@ -166,7 +165,6 @@ public class NewsSources {
 		try {
 			doc = Jsoup.connect(url).get();
 		} catch (IOException e) {
-			Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 			doc = null;
 		}

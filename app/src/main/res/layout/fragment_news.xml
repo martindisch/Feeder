@@ -27,7 +27,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No news"
-            android:id="@+id/tvSbMessage"
             android:textColor="?android:textColorPrimaryInverse"
             android:textSize="14sp" />
 

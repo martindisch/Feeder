@@ -26,7 +26,7 @@ public class NewsFragment extends Fragment {
     private NewsSources nSources;
     private NewsCollection nColl;
     private RelativeLayout mSnackbar;
-    private TextView mSnackButton, mSnackMessage;
+    private TextView mSnackButton;
 
     public String name = "NewsFragment";
 
@@ -36,7 +36,6 @@ public class NewsFragment extends Fragment {
         mList = (RecyclerView) v.findViewById(R.id.rvList);
         mSnackButton = (TextView) v.findViewById(R.id.snackbar_button);
         mSnackbar = (RelativeLayout) v.findViewById(R.id.snackbar);
-        mSnackMessage = (TextView) v.findViewById(R.id.tvSbMessage);
         return v;
     }
 
@@ -67,17 +66,9 @@ public class NewsFragment extends Fragment {
         moveSnackbar(px);
     }
 
-    public void showSnackbarMessage(String message) {
-        mSnackMessage.setText(message);
-        showSnackbar();
-    }
-
     private void hideSnackbar() {
         float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 56, getResources().getDisplayMetrics());
         moveSnackbar(px);
-        if (!mSnackMessage.getText().toString().contentEquals("No news")) {
-            mSnackMessage.setText("No news");
-        }
     }
 
     private void moveSnackbar(float px) {
@@ -131,17 +122,5 @@ public class NewsFragment extends Fragment {
             }
 
         }).start();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Notifier.setParent(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Notifier.setUnsafe();
     }
 }
