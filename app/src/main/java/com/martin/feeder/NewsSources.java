@@ -343,7 +343,7 @@ public class NewsSources {
         for (int i = 0; i < filtered.length; i++) {
             editor.putBoolean(filtered[i], true);
         }
-        editor.commit();
+        editor.apply();
     }
 	
 	public void setAllRead() {
@@ -359,7 +359,7 @@ public class NewsSources {
 		for (int i = 0; i < nColl.getTitles().length; i++) {
 			editor.putBoolean(nColl.getTitles()[i], true);
 		}
-		editor.commit();
+		editor.apply();
 	}
 
 }

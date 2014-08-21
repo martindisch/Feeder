@@ -123,7 +123,7 @@ public class Main extends Activity implements ActionBar.TabListener, OnProgressC
                     public void onClick(DialogInterface dialog, int which) {
                         SharedPreferences.Editor editor = spSettings.edit();
                         editor.putInt("interval", np.getValue());
-                        editor.commit();
+                        editor.apply();
                         ScheduleService();
                     }
 
@@ -147,7 +147,7 @@ public class Main extends Activity implements ActionBar.TabListener, OnProgressC
         return super.onOptionsItemSelected(item);
     }
 
-    public Fragment findFragmentByPosition(int position) {
+    public Fragment findFragmentByPosition(@SuppressWarnings("SameParameterValue") int position) {
         SectionsPagerAdapter fragmentPagerAdapter = mSectionsPagerAdapter;
         return getFragmentManager().findFragmentByTag(
                 "android:switcher:" + mViewPager.getId() + ":"
@@ -181,10 +181,7 @@ public class Main extends Activity implements ActionBar.TabListener, OnProgressC
 
     @Override
     public boolean changeVisibility() {
-        if (actionsInProgress > 0) {
-            return false;
-        }
-        return true;
+        return actionsInProgress <= 0;
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.martin.feeder;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +29,7 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row, null);
+        @SuppressLint("InflateParams") View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row, null);
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,7 +41,7 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder> {
                     SharedPreferences spLibrary = parent.getActivity().getSharedPreferences("Library", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = spLibrary.edit();
                     editor.putBoolean(((TextView) view.findViewById(R.id.tvTitle)).getText().toString(), true);
-                    editor.commit();
+                    editor.apply();
                     nColl.removeItem(((NewsFragment) parent).mList.getChildPosition(view));
                     notifyDataSetChanged();
                 }

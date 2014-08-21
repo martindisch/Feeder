@@ -4,9 +4,11 @@
     <item android:id="@+id/mark_read"
         android:title="@string/mark_read"
         android:orderInCategory="50"
-        android:showAsAction="never"/>
+        android:showAsAction="never"
+        tools:ignore="AppCompatResource" />
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
-        android:showAsAction="never" />
+        android:showAsAction="never"
+        tools:ignore="AppCompatResource" />
 </menu>

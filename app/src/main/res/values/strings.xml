@@ -5,6 +5,8 @@
     <string name="action_settings">Interval</string>
     <string name="source">Source:</string>
     <string name="mark_read">Mark all as read</string>
+    <string name="got_it">Got it</string>
+    <string name="no_news">No news</string>
     <string-array name="titles">
         <item>News</item>
         <item>All sites</item>

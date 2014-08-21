@@ -76,7 +76,7 @@ public class NewsCheck extends IntentService {
 				for (int i = 0; i < counter; i++) {
 					editor.putBoolean(filtered[i], true);
 				}
-				editor.commit();
+				editor.apply();
 			}
 			
 		}
