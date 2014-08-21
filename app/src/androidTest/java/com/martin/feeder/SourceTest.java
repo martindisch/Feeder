@@ -7,7 +7,7 @@ public class SourceTest extends AndroidTestCase {
 
     private NewsSources nSources;
     private NewsCollection nColl;
-    String tag;
+    private String tag;
 
     @Override
     public void setUp() throws Exception {

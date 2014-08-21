@@ -43,13 +43,14 @@ public class Main extends Activity implements ActionBar.TabListener, OnProgressC
      * may be best to switch to a
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
-    SectionsPagerAdapter mSectionsPagerAdapter;
+    private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    ViewPager mViewPager;
+    private ViewPager mViewPager;
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +75,7 @@ public class Main extends Activity implements ActionBar.TabListener, OnProgressC
         // tab. We can also use ActionBar.Tab#select() to do this if we have
         // a reference to the Tab.
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @SuppressWarnings("deprecation")
             @Override
             public void onPageSelected(int position) {
                 actionBar.setSelectedNavigationItem(position);
@@ -147,7 +149,8 @@ public class Main extends Activity implements ActionBar.TabListener, OnProgressC
         return super.onOptionsItemSelected(item);
     }
 
-    public Fragment findFragmentByPosition(@SuppressWarnings("SameParameterValue") int position) {
+    @SuppressWarnings("SameParameterValue")
+    public Fragment findFragmentByPosition(int position) {
         SectionsPagerAdapter fragmentPagerAdapter = mSectionsPagerAdapter;
         return getFragmentManager().findFragmentByTag(
                 "android:switcher:" + mViewPager.getId() + ":"

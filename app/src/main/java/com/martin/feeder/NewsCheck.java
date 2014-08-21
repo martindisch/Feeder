@@ -13,7 +13,7 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
-public class NewsCheck extends IntentService {
+class NewsCheck extends IntentService {
 
 	public NewsCheck() {
 		super(NewsCheck.class.getSimpleName());

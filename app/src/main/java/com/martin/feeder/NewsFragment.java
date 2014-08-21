@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+@SuppressWarnings("WeakerAccess")
 public class NewsFragment extends Fragment {
 
     private OnProgressChangeListener mCallback;
@@ -27,8 +28,6 @@ public class NewsFragment extends Fragment {
     private NewsCollection nColl;
     private RelativeLayout mSnackbar;
     private TextView mSnackButton;
-
-    public String name = "NewsFragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,10 +57,10 @@ public class NewsFragment extends Fragment {
         // Initialize Snackbar
         float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 56, getResources().getDisplayMetrics());
         mSnackbar.setY(mSnackbar.getY() + px);
-        mSnackbar.setVisibility(mSnackbar.VISIBLE);
+        mSnackbar.setVisibility(View.VISIBLE);
     }
 
-    public void showSnackbar() {
+    void showSnackbar() {
         float px = -TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 56, getResources().getDisplayMetrics());
         moveSnackbar(px);
     }

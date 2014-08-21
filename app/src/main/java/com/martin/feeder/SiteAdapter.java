@@ -17,9 +17,9 @@ import java.util.Arrays;
 
 public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder> {
 
-    private NewsCollection nColl;
-    private Fragment parent;
-    private String parentName;
+    private final NewsCollection nColl;
+    private final Fragment parent;
+    private final String parentName;
 
     public SiteAdapter(NewsCollection nColl, Fragment parent, String parentName) {
         this.nColl = nColl;
@@ -63,7 +63,8 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView mTitle, mContent;
+        public final TextView mTitle;
+        public final TextView mContent;
 
         public ViewHolder(View itemView) {
             super(itemView);

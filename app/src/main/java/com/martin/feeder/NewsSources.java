@@ -18,8 +18,8 @@ import android.widget.Toast;
  * @author Martin
  *	
  */
-public class NewsSources {
-	private Context context;
+class NewsSources {
+	private final Context context;
 
 	public NewsSources(Context context) {
 		super();

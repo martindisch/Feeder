@@ -9,7 +9,7 @@ import android.content.SharedPreferences;
 import android.text.format.DateUtils;
 import android.text.format.Time;
 
-public class MyBroadcastReceiver extends BroadcastReceiver {
+class MyBroadcastReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {

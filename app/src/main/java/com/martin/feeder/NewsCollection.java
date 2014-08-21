@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class NewsCollection {
-	private ArrayList<String> titles;
-	private ArrayList<String> urls;
-	private ArrayList<String> contents;
+	private final ArrayList<String> titles;
+	private final ArrayList<String> urls;
+	private final ArrayList<String> contents;
 	
 	public NewsCollection(String[] titles, String[] urls, String[] contents) {
 		super();

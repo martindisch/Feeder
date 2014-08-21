@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
+@SuppressWarnings("WeakerAccess")
 public class SourcesFragment extends Fragment {
 
     private RecyclerView mList;
