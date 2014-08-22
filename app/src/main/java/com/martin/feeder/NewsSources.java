@@ -24,6 +24,7 @@ class NewsSources {
         this.context = context;
     }
 
+    @SuppressWarnings("UnusedAssignment")
     public NewsCollection getA3_News() {
         final String url = "http://www.arma3.com/news";
         final String classname = "col-sm-9";
@@ -65,6 +66,7 @@ class NewsSources {
         return nColl;
     }
 
+    @SuppressWarnings("UnusedAssignment")
     public NewsCollection getA3_Devhub() {
         final String url = "http://dev.arma3.com/";
         final String classname = "post-preview";
@@ -106,6 +108,7 @@ class NewsSources {
         return nColl;
     }
 
+    @SuppressWarnings("UnusedAssignment")
     public NewsCollection getSpaceEngineers_News() {
         final String url = "http://www.spaceengineersgame.com/news.html";
         final String classname = "paragraph";
@@ -147,6 +150,7 @@ class NewsSources {
         return nColl;
     }
 
+    @SuppressWarnings("UnusedAssignment")
     public NewsCollection getLayer_News() {
         final String url = "http://blog.layer.com/";
         final String classname = "post";

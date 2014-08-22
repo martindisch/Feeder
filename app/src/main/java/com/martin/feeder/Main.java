@@ -42,7 +42,7 @@ public class Main extends Activity implements ActionBar.TabListener, OnProgressC
      */
     private ViewPager mViewPager;
 
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({"deprecation", "ConstantConditions"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
