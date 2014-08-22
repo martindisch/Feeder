@@ -1,13 +1,10 @@
 package com.martin.feeder;
 
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.SharedPreferences;
 import android.graphics.Path;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -17,13 +14,12 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 @SuppressWarnings("WeakerAccess")
 public class NewsFragment extends Fragment {
 
-    private OnProgressChangeListener mCallback;
     public RecyclerView mList;
+    private OnProgressChangeListener mCallback;
     private NewsSources nSources;
     private NewsCollection nColl;
     private RelativeLayout mSnackbar;
@@ -109,9 +105,8 @@ public class NewsFragment extends Fragment {
                     public void run() {
                         mList.setAdapter(new SiteAdapter(nColl, ((Main) getActivity()).findFragmentByPosition(0), "NewsFragment"));
                         if (nColl.getTitles().length == 0) {
-                           showSnackbar();
-                        }
-                        else {
+                            showSnackbar();
+                        } else {
                             nSources.setAllNotified(nColl);
                         }
                         mCallback.actionFinished();

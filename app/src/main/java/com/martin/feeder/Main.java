@@ -1,9 +1,7 @@
 package com.martin.feeder;
 
-import java.util.Locale;
-
-import android.app.Activity;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -14,21 +12,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.format.DateUtils;
 import android.text.format.Time;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.NumberPicker;
-import android.widget.TextView;
 
 
 public class Main extends Activity implements ActionBar.TabListener, OnProgressChangeListener {
@@ -187,6 +179,24 @@ public class Main extends Activity implements ActionBar.TabListener, OnProgressC
         return actionsInProgress <= 0;
     }
 
+    private void ScheduleService() {
+        SharedPreferences spSettings = this.getSharedPreferences("Settings",
+                Context.MODE_PRIVATE);
+        Intent intent = new Intent(this, NewsCheck.class);
+        PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        long currentTimeMillis = System.currentTimeMillis();
+        long nextUpdateTimeMillis = currentTimeMillis
+                + spSettings.getInt("interval", 240) * DateUtils.MINUTE_IN_MILLIS;
+        Time nextUpdateTime = new Time();
+        nextUpdateTime.set(nextUpdateTimeMillis);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setInexactRepeating(AlarmManager.RTC,
+                nextUpdateTimeMillis, spSettings.getInt("interval", 240)
+                        * DateUtils.MINUTE_IN_MILLIS, pendingIntent);
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -220,24 +230,6 @@ public class Main extends Activity implements ActionBar.TabListener, OnProgressC
         public CharSequence getPageTitle(int position) {
             return getResources().getStringArray(R.array.titles)[position];
         }
-    }
-
-    private void ScheduleService() {
-        SharedPreferences spSettings = this.getSharedPreferences("Settings",
-                Context.MODE_PRIVATE);
-        Intent intent = new Intent(this, NewsCheck.class);
-        PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        long currentTimeMillis = System.currentTimeMillis();
-        long nextUpdateTimeMillis = currentTimeMillis
-                + spSettings.getInt("interval", 240) * DateUtils.MINUTE_IN_MILLIS;
-        Time nextUpdateTime = new Time();
-        nextUpdateTime.set(nextUpdateTimeMillis);
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setInexactRepeating(AlarmManager.RTC,
-                nextUpdateTimeMillis, spSettings.getInt("interval", 240)
-                        * DateUtils.MINUTE_IN_MILLIS, pendingIntent);
     }
 
 }

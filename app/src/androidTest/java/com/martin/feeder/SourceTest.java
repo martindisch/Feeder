@@ -22,6 +22,7 @@ public class SourceTest extends AndroidTestCase {
         Log.d(tag, nColl.getContents()[0]);
         Log.d(tag, nColl.getUrls()[0]);
     }
+
     public void testA3Devhub() {
         tag = "A3D";
         nColl = nSources.getA3_Devhub();
@@ -30,6 +31,7 @@ public class SourceTest extends AndroidTestCase {
         Log.d(tag, nColl.getUrls()[0]);
 
     }
+
     public void testSpaceEngineers() {
         tag = "SEng";
         nColl = nSources.getSpaceEngineers_News();
@@ -38,6 +40,7 @@ public class SourceTest extends AndroidTestCase {
         Log.d(tag, nColl.getUrls()[0]);
 
     }
+
     public void testLayer() {
         tag = "Layer";
         nColl = nSources.getLayer_News();

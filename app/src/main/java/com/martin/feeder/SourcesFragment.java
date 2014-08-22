@@ -88,7 +88,8 @@ public class SourcesFragment extends Fragment {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
 
         nSources = new NewsSources(getActivity());

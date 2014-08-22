@@ -12,10 +12,10 @@
         <item>All sites</item>
     </string-array>
     <string-array name="dropdown_values">
-        <item >ArmA 3 News</item>
-        <item >ArmA 3 Devhub</item>
-        <item >Space Engineers</item>
-        <item >Layer News</item>
+        <item>ArmA 3 News</item>
+        <item>ArmA 3 Devhub</item>
+        <item>Space Engineers</item>
+        <item>Layer News</item>
     </string-array>
 
 </resources>

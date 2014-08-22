@@ -7,9 +7,9 @@ public class CollectionTest extends AndroidTestCase {
     private NewsCollection testCollection;
 
     private void prep() {
-        String[] titles = { "Title 1", "Title 2", "Title 3", "Title 4" };
-        String[] urls = { "Url1", "Url2", "Url3", "Url4" };
-        String[] contents = { "C1", "C2", "C3", "C4" };
+        String[] titles = {"Title 1", "Title 2", "Title 3", "Title 4"};
+        String[] urls = {"Url1", "Url2", "Url3", "Url4"};
+        String[] contents = {"C1", "C2", "C3", "C4"};
         testCollection = new NewsCollection(titles, urls, contents);
     }
 
