@@ -16,7 +16,7 @@ import java.io.IOException;
  *
  * @author Martin
  */
-class NewsSources {
+public class NewsSources {
     private final Context context;
 
     public NewsSources(Context context) {

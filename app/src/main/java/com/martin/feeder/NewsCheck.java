@@ -13,7 +13,7 @@ import android.support.v4.app.TaskStackBuilder;
 
 import java.util.Random;
 
-class NewsCheck extends IntentService {
+public class NewsCheck extends IntentService {
 
     public NewsCheck() {
         super(NewsCheck.class.getSimpleName());
