@@ -55,7 +55,7 @@ public class NewsCheck extends IntentService {
                     mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(news));
                 } else {
                     resultIntent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(nColl.getUrls()[0]));
+                    resultIntent.setData(Uri.parse(nColl.getUrls()[0]));
                 }
 
                 TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
