@@ -3,6 +3,8 @@ package com.martin.feeder;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Path;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +16,10 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 @SuppressWarnings("WeakerAccess")
 public class NewsFragment extends Fragment {
@@ -122,5 +128,17 @@ public class NewsFragment extends Fragment {
             }
 
         }).start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        NewsCollection current = ((SiteAdapter) mList.getAdapter()).getColl();
+        SharedPreferences prefs = getActivity().getSharedPreferences("open_collection", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putStringSet("titles", new HashSet<String>(Arrays.asList(current.getTitles())));
+        editor.putStringSet("contents", new HashSet<String>(Arrays.asList(current.getContents())));
+        editor.putStringSet("urls", new HashSet<String>(Arrays.asList(current.getContents())));
+        editor.commit();
     }
 }

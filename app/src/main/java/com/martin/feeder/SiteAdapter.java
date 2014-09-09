@@ -69,4 +69,8 @@ public class SiteAdapter extends RecyclerView.Adapter<SiteAdapter.ViewHolder> {
             mContent = (TextView) itemView.findViewById(R.id.tvContent);
         }
     }
+
+    public NewsCollection getColl() {
+        return nColl;
+    }
 }
