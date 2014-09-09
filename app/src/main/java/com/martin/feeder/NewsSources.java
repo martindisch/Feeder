@@ -44,7 +44,7 @@ public class NewsSources {
             e.printStackTrace();
             doc = null;
         }
-        if (!(doc == null)) {
+        if (doc != null) {
             content = doc.getElementsByClass(classname);
             // Remove last element which isn't a post
             content.remove(content.size() - 1);
@@ -86,7 +86,7 @@ public class NewsSources {
             e.printStackTrace();
             doc = null;
         }
-        if (!(doc == null)) {
+        if (doc != null) {
             content = doc.getElementsByClass(classname);
             // Remove last element which isn't a post
             content.remove(content.size() - 1);
@@ -128,7 +128,7 @@ public class NewsSources {
             e.printStackTrace();
             doc = null;
         }
-        if (!(doc == null)) {
+        if (doc != null) {
             content = doc.getElementsByClass(classname);
 
             titles = new String[content.size()];
@@ -170,7 +170,7 @@ public class NewsSources {
             e.printStackTrace();
             doc = null;
         }
-        if (!(doc == null)) {
+        if (doc != null) {
             content = doc.getElementsByClass(classname);
 
             titles = new String[content.size()];
