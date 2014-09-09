@@ -133,12 +133,14 @@ public class NewsFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        NewsCollection current = ((SiteAdapter) mList.getAdapter()).getColl();
-        SharedPreferences prefs = getActivity().getSharedPreferences("open_collection", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putStringSet("titles", new HashSet<String>(Arrays.asList(current.getTitles())));
-        editor.putStringSet("contents", new HashSet<String>(Arrays.asList(current.getContents())));
-        editor.putStringSet("urls", new HashSet<String>(Arrays.asList(current.getContents())));
-        editor.commit();
+        if (mList.getAdapter() != null) {
+            NewsCollection current = ((SiteAdapter) mList.getAdapter()).getColl();
+            SharedPreferences prefs = getActivity().getSharedPreferences("open_collection", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putStringSet("titles", new HashSet<String>(Arrays.asList(current.getTitles())));
+            editor.putStringSet("contents", new HashSet<String>(Arrays.asList(current.getContents())));
+            editor.putStringSet("urls", new HashSet<String>(Arrays.asList(current.getContents())));
+            editor.apply();
+        }
     }
 }
