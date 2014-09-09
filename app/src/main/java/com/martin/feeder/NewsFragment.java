@@ -100,6 +100,18 @@ public class NewsFragment extends Fragment {
             getActivity().setProgressBarIndeterminateVisibility(true);
         }
         mCallback.actionStarted();
+
+        // Load last entries
+        SharedPreferences prefs = getActivity().getSharedPreferences("open_collection", Context.MODE_PRIVATE);
+        Set<String> titles = prefs.getStringSet("titles", null);
+        Set<String> contents = prefs.getStringSet("contents", null);
+        Set<String> urls = prefs.getStringSet("urls", null);
+        if (titles != null) {
+            NewsCollection oldEntries = new NewsCollection((String[]) titles.toArray(), (String[]) contents.toArray(), (String[]) urls.toArray());
+            mList.setAdapter(new SiteAdapter(oldEntries, ((Main) getActivity()).findFragmentByPosition(0), "NewsFragment"));
+        }
+
+        // Load new entries
         new Thread(new Runnable() {
 
             @Override
@@ -133,14 +145,16 @@ public class NewsFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+        SharedPreferences prefs = getActivity().getSharedPreferences("open_collection", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        // Delete old entries just in case we don't have any new ones
+        editor.clear();
         if (mList.getAdapter() != null) {
             NewsCollection current = ((SiteAdapter) mList.getAdapter()).getColl();
-            SharedPreferences prefs = getActivity().getSharedPreferences("open_collection", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
             editor.putStringSet("titles", new HashSet<String>(Arrays.asList(current.getTitles())));
             editor.putStringSet("contents", new HashSet<String>(Arrays.asList(current.getContents())));
             editor.putStringSet("urls", new HashSet<String>(Arrays.asList(current.getContents())));
-            editor.apply();
         }
+        editor.apply();
     }
 }
