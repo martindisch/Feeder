@@ -103,11 +103,14 @@ public class NewsFragment extends Fragment {
 
                     @Override
                     public void run() {
-                        mList.setAdapter(new SiteAdapter(nColl, ((Main) getActivity()).findFragmentByPosition(0), "NewsFragment"));
                         if (nColl.getTitles().length == 0) {
                             showSnackbar();
                         } else {
-                            nSources.setAllNotified(nColl);
+                            // Only show entries if they're not full of nulls
+                            if (!nColl.getTitles()[0].contains("null")) {
+                                mList.setAdapter(new SiteAdapter(nColl, ((Main) getActivity()).findFragmentByPosition(0), "NewsFragment"));
+                                nSources.setAllNotified(nColl);
+                            }
                         }
                         mCallback.actionFinished();
                         if (mCallback.changeVisibility()) {
