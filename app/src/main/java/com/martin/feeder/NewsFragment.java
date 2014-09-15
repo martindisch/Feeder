@@ -9,6 +9,7 @@ import android.graphics.Path;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,7 +108,7 @@ public class NewsFragment extends Fragment {
         Set<String> contents = prefs.getStringSet("contents", null);
         Set<String> urls = prefs.getStringSet("urls", null);
         if (titles != null) {
-            NewsCollection oldEntries = new NewsCollection((String[]) titles.toArray(), (String[]) contents.toArray(), (String[]) urls.toArray());
+            NewsCollection oldEntries = new NewsCollection(titles.toArray(new String[titles.size()]), contents.toArray(new String[contents.size()]), urls.toArray(new String[urls.size()]));
             mList.setAdapter(new SiteAdapter(oldEntries, ((Main) getActivity()).findFragmentByPosition(0), "NewsFragment"));
         }
 
